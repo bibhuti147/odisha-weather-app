@@ -12,31 +12,33 @@ const Carousel = ({ fposts }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const tposts = fposts.slice(0, 5);
+
   const handlePrevClick = () => {
     setCurrentIndex((currentIndex) =>
-      currentIndex === 0 ? fposts.length - 1 : currentIndex - 1
+      currentIndex === 0 ? tposts.length - 1 : currentIndex - 1
     );
   };
 
   const handleNextClick = () => {
     setCurrentIndex((currentIndex) =>
-      currentIndex === fposts.length - 1 ? 0 : currentIndex + 1
+      currentIndex === tposts.length - 1 ? 0 : currentIndex + 1
     );
   };
 
   const navigate = useNavigate();
   const handleClick = async () => {
     // Update view count for the blog post
-    const postDocRef = doc(db, "blogposts", fposts[currentIndex].id);
+    const postDocRef = doc(db, "blogposts", tposts[currentIndex].id);
     try {
       await updateDoc(postDocRef, {
-        views: fposts[currentIndex].views ? fposts[currentIndex].views + 1 : 1,
+        views: tposts[currentIndex].views ? tposts[currentIndex].views + 1 : 1,
       });
     } catch (error) {
       console.error("Error updating view count: ", error);
     }
     // Navigate to the blog post page
-    navigate(`/blogpost/${fposts[currentIndex].id}`);
+    navigate(`/blogpost/${tposts[currentIndex].id}`);
 
     // Scroll to the top of the page
     window.scrollTo(0, 0);
@@ -45,17 +47,17 @@ const Carousel = ({ fposts }) => {
   // Function to handle autoslide
   const autoSlide = () => {
     setCurrentIndex((currentIndex) =>
-      currentIndex === fposts.length - 1 ? 0 : currentIndex + 1
+      currentIndex === tposts.length - 1 ? 0 : currentIndex + 1
     );
   };
 
   useEffect(() => {
     // Start auto sliding every 5 seconds
-    const interval = setInterval(autoSlide, 5000);
+    const interval = setInterval(autoSlide, 3000);
 
     // Clear the interval on component unmount
     return () => clearInterval(interval);
-  }, [currentIndex]); // Run the effect whenever currentIndex changes
+  }, [currentIndex, fposts]); // Run the effect whenever currentIndex changes
 
   // Swipeable handlers
   const swipeHandlers = useSwipeable({
@@ -69,31 +71,31 @@ const Carousel = ({ fposts }) => {
         onClick={handleClick}
         class="h-48 md:h-96 rounded-md shadow-2xl overflow-hidden bg-cover bg-center w-full"
         style={{
-          backgroundImage: `url(${fposts[currentIndex].thumbnail})`,
+          backgroundImage: `url(${tposts[currentIndex].thumbnail})`,
         }}
       >
         <div class="bg-gray-900 bg-opacity-70 flex items-center h-full">
           <div class="px-2 md:px-8 mt-20 md:mt-40">
             <h2 class="text-sm md:text-2xl mb-1 text-white font-semibold line-clamp-2">
-              {fposts[currentIndex].title}
+              {tposts[currentIndex].title}
             </h2>
             <div class="flex md:mt-4">
               <img
-                src={fposts[currentIndex].profileImageUrl}
+                src={tposts[currentIndex].profileImageUrl}
                 class="md:h-10 md:w-10 h-7 w-7 rounded-full mr-2 object-cover"
               />
               <div>
                 <p class="font-semibold text-white text-lg md:text-xl">
                   {" "}
-                  {fposts[currentIndex].author.name}{" "}
+                  {tposts[currentIndex].author.name}{" "}
                 </p>
                 <p class="font-semibold text-white text-xs mb-1">
                   {" "}
-                  {fposts[currentIndex].createdAt
+                  {tposts[currentIndex].createdAt
                     .toDate()
                     .toLocaleString("default", {
                       year: "numeric",
-                      weekday: "short",
+                      day: "numeric",
                       month: "short",
                       hour: "numeric",
                       minute: "numeric",
@@ -107,7 +109,7 @@ const Carousel = ({ fposts }) => {
       </div>
 
       <div class="flex justify-center mt-[-15px] gap-1">
-        {fposts.map((_, index) => (
+        {tposts.map((_, index) => (
           <button
             onClick={() => setCurrentIndex(index)}
             key={index}

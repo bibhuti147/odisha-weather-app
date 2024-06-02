@@ -29,8 +29,10 @@ const Weatherwidget = () => {
       `${api.base}data/2.5/forecast?lat=${newLat}&lon=${newLon}&units=metric&appid=${api.key}`
     );
     const result2 = await res2.json();
-    setWeather(result2);
-    processWeatherData(result2.list);
+    if (res2.status === 200) {
+      setWeather(result2);
+      processWeatherData(result2.list);
+    }
   };
 
   const processWeatherData = (weatherList) => {
@@ -184,11 +186,15 @@ const Weatherwidget = () => {
                     <br />
                     <strong className="font-bold text-xs">
                       {Math.floor(
-                        dailyTemps[new Date().getDate() + index / 8].tempMin
+                        dailyTemps[
+                          ((new Date().getDate() + index / 8 - 1) % 30) + 1
+                        ]?.tempMin
                       )}
                       °C/
                       {Math.ceil(
-                        dailyTemps[new Date().getDate() + index / 8].tempMax
+                        dailyTemps[
+                          ((new Date().getDate() + index / 8 - 1) % 30) + 1
+                        ]?.tempMax
                       )}
                       °C
                     </strong>

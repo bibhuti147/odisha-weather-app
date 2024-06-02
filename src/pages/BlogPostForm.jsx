@@ -99,31 +99,6 @@ const BlogPostForm = () => {
         toast.error(error);
       }
     }
-
-    const newPost = {
-      title: title,
-      thumbnail: thumbnail,
-    };
-
-    try {
-      const response = await fetch(
-        "https://api-3wz1kdexv-odisha-weathers-projects.vercel.app/new-post.js",
-        {
-          mode: "no-cors",
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newPost),
-        }
-      );
-
-      if (response.ok) {
-        alert("Post created and subscribers notified.");
-      } else {
-        alert("Failed to notify subscribers.");
-      }
-    } catch (error) {
-      alert("An error occurred. Please try again.");
-    }
   };
 
   useEffect(() => {

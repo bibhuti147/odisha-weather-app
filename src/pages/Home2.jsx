@@ -160,8 +160,8 @@ function Home2() {
                   </select>
                 </div>
               </div>
-              <div className="mt-5 rounded-lg py-1 px-3">
-                <section class="transition-all duration-150 px-2 py-6 w-full gap-5 grid md:grid-cols-3 sm:grid-cols-1">
+              <div className="mt-5 rounded-lg py-1">
+                <section class="transition-all duration-150 px-1 py-6 w-full gap-5 grid md:grid-cols-3 sm:grid-cols-1">
                   {posts.slice(start, end).map((item) => (
                     <IntroPosts2 post={item} key={item.id} />
                   ))}
@@ -178,16 +178,23 @@ function Home2() {
                   {posts.length == 0 ? (
                     <div>
                       {Array.from(
-                        { length: Math.ceil(getAllBlogs.length / 6) },
+                        {
+                          length: Math.min(
+                            3,
+                            Math.ceil(getAllBlogs.length / 6)
+                          ),
+                        },
                         (_, i) => (
                           <button
                             key={i + 1}
-                            onClick={() => setPage(i + 1)}
+                            onClick={() => setPage(i + (page - 1) * 3 + 1)}
                             className={`px-3 py-2 mx-1 font-medium text-black bg-white rounded-md focus:outline-none ${
-                              page === i + 1 ? "bg-gray-300 text-black" : ""
+                              page === i + (page - 1) * 3 + 1
+                                ? "bg-gray-300 text-black"
+                                : ""
                             }`}
                           >
-                            {i + 1}
+                            {i + (page - 1) * 3 + 1}
                           </button>
                         )
                       )}
@@ -195,16 +202,23 @@ function Home2() {
                   ) : (
                     <div>
                       {Array.from(
-                        { length: Math.ceil(posts.length / 6) },
+                        {
+                          length: Math.min(
+                            3,
+                            Math.ceil(posts.length / 6) - page + 1
+                          ),
+                        },
                         (_, i) => (
                           <button
                             key={i + 1}
-                            onClick={() => setPage(i + 1)}
+                            onClick={() => setPage(i + page)}
                             className={`px-3 py-2 mx-1 font-medium text-black bg-white rounded-md focus:outline-none ${
-                              page === i + 1 ? "bg-gray-300 text-black" : ""
+                              page === i + page - 1
+                                ? "bg-gray-300 text-black"
+                                : ""
                             }`}
                           >
-                            {i + 1}
+                            {i + page}
                           </button>
                         )
                       )}
