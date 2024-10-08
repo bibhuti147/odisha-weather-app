@@ -1,6 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import { BiLike } from "react-icons/bi";
-import { FaReply } from "react-icons/fa";
+import React, { useContext, useEffect } from "react"; 
 import { MdDelete } from "react-icons/md";
 import { UserContext } from "../context/user.context";
 import { AdminContext } from "../context/admin.context";

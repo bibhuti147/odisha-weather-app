@@ -1,16 +1,8 @@
 import React, { useState } from "react";
-import {
-  Navbar,
-  Typography,
-  Avatar,
-  Collapse,
-  Dialog,
-  DialogBody,
-  Input,
-} from "@material-tailwind/react";
+import { Navbar, Typography, Avatar, Collapse } from "@material-tailwind/react";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AiOutlineShareAlt, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
 import logo2 from "../assets/images/logo2.png";
 import logo3 from "../assets/images/logo3.png";
 import { UserContext } from "../context/user.context";
@@ -26,6 +18,7 @@ import { AllUsersContext } from "../context/allusers.context";
 import { BlogContext } from "../context/blog.context";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import { logEvent } from "firebase/analytics";
+import LanguageSwitch from "./LanguageSwitch";
 
 export default function Header2() {
   let admin;
@@ -226,6 +219,9 @@ export default function Header2() {
           Login
         </Typography>
       )}
+      <div className="mr-2 hidden">
+        <LanguageSwitch />
+      </div>
     </ul>
   );
 
@@ -265,6 +261,9 @@ export default function Header2() {
             <div className="hidden lg:block">{navList}</div>
             {/* Search Icon */}
             {/* Share Icon */}
+            <div className="hidden">
+              <LanguageSwitch />
+            </div>
             <div>
               <AiOutlineSearch
                 onClick={() => handleSubmit()}

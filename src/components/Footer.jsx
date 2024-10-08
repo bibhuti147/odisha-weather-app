@@ -1,9 +1,45 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ReactGA from "react-ga4";
 
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
+  };
+
+  const handleClickTwitter = () => {
+    ReactGA.event({
+      category: "Footer Twitter Button",
+      action: "Footer Twitter Button",
+    });
+  };
+
+  const handleClickFacebook = () => {
+    ReactGA.event({
+      category: "Footer Facebook Button",
+      action: "Footer Facebook Button",
+    });
+  };
+
+  const handleClickYoutube = () => {
+    ReactGA.event({
+      category: "Footer Youtube Button",
+      action: "Footer Youtube Button",
+    });
+  };
+
+  const handleClickInstagram = () => {
+    ReactGA.event({
+      category: "Footer Instagram Button",
+      action: "Footer Instagram Button",
+    });
+  };
+
+  const handleClickWhatsapp = () => {
+    ReactGA.event({
+      category: "Footer Whatsapp Button",
+      action: "Footer Whatsapp Button",
+    });
   };
 
   return (
@@ -32,6 +68,7 @@ const Footer = () => {
               </h5>
               <div class="mt-6 lg:mb-0 mb-6">
                 <button
+                  onClick={handleClickTwitter}
                   class="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
@@ -43,6 +80,7 @@ const Footer = () => {
                   </Link>
                 </button>
                 <button
+                  onClick={handleClickFacebook}
                   class="bg-white text-blue-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
@@ -54,6 +92,7 @@ const Footer = () => {
                   </Link>
                 </button>
                 <button
+                  onClick={handleClickYoutube}
                   class="bg-white text-red-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
@@ -65,6 +104,7 @@ const Footer = () => {
                   </Link>
                 </button>
                 <button
+                  onClick={handleClickInstagram}
                   class="bg-white text-red-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
@@ -76,6 +116,7 @@ const Footer = () => {
                   </Link>
                 </button>
                 <button
+                  onClick={handleClickWhatsapp}
                   class="bg-white text-green-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >

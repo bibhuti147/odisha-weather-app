@@ -6,15 +6,18 @@ import abhishek from "../assets/images/abhishek.jpg";
 import sarthak from "../assets/images/sarthak.jpg";
 import soumya from "../assets/images/s.svg";
 import chinmay from "../assets/images/chinmay.jpg";
-import { logEvent } from "firebase/analytics";
-import { analytics } from "../firebase-config";
+import ReactGA from "react-ga4";
 
 function Aboutus() {
   // Log a screen_view event when the component mounts
   useEffect(() => {
-    logEvent(analytics, "screen_view", {
-      firebase_screen: "AboutUs",
-      firebase_screen_class: "AboutUs",
+    ReactGA.initialize(import.meta.env.VITE_MEASUREMENT_ID);
+
+    // Send a pageview hit
+    ReactGA.send({
+      hitType: "pageview",
+      page: "/aboutus",
+      title: "About Us",
     });
   }, []);
 

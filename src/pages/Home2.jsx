@@ -5,9 +5,8 @@ import IntroPosts2 from "../components/IntroPosts2";
 import Weatherwidget from "../components/Weatherwidget";
 import Carousel from "../components/Featuredblogposts";
 import { BlogContext } from "../context/blog.context";
-import translateText from "../GoogleTranslate";
-import { analytics } from "../firebase-config";
-import { logEvent } from "firebase/analytics";
+import ReactGA from "react-ga4";
+import LanguageSwitch from "../components/LanguageSwitch";
 
 function Home2() {
   const { getAllBlogs } = useContext(BlogContext);
@@ -20,9 +19,13 @@ function Home2() {
 
   // Log a screen_view event when the component mounts
   useEffect(() => {
-    logEvent(analytics, "screen_view", {
-      firebase_screen: "Home2",
-      firebase_screen_class: "Home2",
+    ReactGA.initialize(import.meta.env.VITE_MEASUREMENT_ID);
+
+    // Send a pageview hit
+    ReactGA.send({
+      hitType: "pageview",
+      page: "/",
+      title: "Home Page",
     });
   }, []);
 
@@ -86,7 +89,7 @@ function Home2() {
   return (
     <Layout>
       <div className="overflow-x-hidden bg-[#B4B4B8]">
-        <h1 class="text-xl font-bold md:text-2xl mt-10 ml-6 md:ml-12 mb-[-10px]">
+        <h1 class="text-xl font-bold md:text-2xl mt-6 ml-6 md:ml-12 mb-[-10px]">
           Trending Post
         </h1>
         <div className="px-6 md:px-14 pt-8">
@@ -239,8 +242,8 @@ function Home2() {
             </div>
           </div>
         </div>
+        
       </div>
-      {/*{currentUser ? <PostFormWidget /> : null}*/}
     </Layout>
   );
 }

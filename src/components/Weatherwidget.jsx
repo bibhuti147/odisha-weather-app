@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CiCloudMoon } from "react-icons/ci";
 import { IoSunnyOutline } from "react-icons/io5";
 import { TiWeatherSunny } from "react-icons/ti";
+import ReactGA from "react-ga4";
 
 const api = {
   key: "01e5a041d3b78a9358f93fac088d5b36",
@@ -33,6 +34,11 @@ const Weatherwidget = () => {
       setWeather(result2);
       processWeatherData(result2.list);
     }
+
+    ReactGA.event({
+      category: "Weatherwidget SearchButton",
+      action: "Weatherwidget SearchButton Clicked",
+    });
   };
 
   const processWeatherData = (weatherList) => {
@@ -91,7 +97,7 @@ const Weatherwidget = () => {
   }, []);
 
   return (
-    <div className="md:px-8 sm:px-5">
+    <div className="md:px-8 sm:px-5 relative">
       <h1 className="mb-4 text-xl font-bold text-black">Weather</h1>
       <input
         type="text"
@@ -102,7 +108,7 @@ const Weatherwidget = () => {
       />
       <button
         onClick={handleButtonClick}
-        className="bg-white p-1 py-2 focus:outline-none text-base ring-2 ring-black ring-opacity-50 text-gray-600 font-medium rounded-md ml-1"
+        className="absolute bg-white p-1 py-2 focus:outline-none text-base ring-2 ring-black ring-opacity-50 text-gray-600 font-medium rounded-md ml-1"
       >
         Search
       </button>

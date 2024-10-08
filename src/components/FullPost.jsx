@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import Aboutauthor from "./Aboutauthor";
 import Morefromauthor from "./Morefromauthor";
 import Morefromcategory from "./Morefromcategory";
 import CommentBox from "./Commentbox";
@@ -19,7 +18,7 @@ import { AllUsersContext } from "../context/allusers.context";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineShareAlt } from "react-icons/ai";
 import { logEvent } from "firebase/analytics";
-import Subscriptionbox from "./Subscriptionbox";
+import ReactGA from "react-ga4";
 
 const FullPost = ({ post, postId, currentUser }) => {
   const { getAllUsers } = useContext(AllUsersContext);
@@ -57,6 +56,11 @@ const FullPost = ({ post, postId, currentUser }) => {
     } catch (error) {
       console.error("Error sharing:", error);
     }
+
+    ReactGA.event({
+      category: `Blogpost_${post.title} Shared`,
+      action: `Blogpost_${post.title} Shared`,
+    });
   };
 
   const logGoogleUser = async () => {
@@ -113,6 +117,11 @@ const FullPost = ({ post, postId, currentUser }) => {
     } catch (error) {
       console.log("Error:", error);
     }
+
+    ReactGA.event({
+      category: `Blogpost_${post.title} LikeButton`,
+      action: `Blogpost_${post.title} LikeButton Clicked`,
+    });
   };
 
   useEffect(() => {

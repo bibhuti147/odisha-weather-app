@@ -11,11 +11,16 @@ import Authentication from "./pages/Authentication";
 import BlogPosts from "./pages/Blogposts";
 import BlogPostForm from "./pages/BlogPostForm";
 import AdminDashboard from "./pages/AdminDashboard";
+import ReactGA from "react-ga4";
 import { useContext, useState } from "react";
 import { AdminContext } from "./context/admin.context";
 import Pparagraph from "./pages/Pparagraph";
 import Tcparagraph from "./pages/Tcparagraph";
 import BlogEditForm from "./pages/BlogEditForm";
+
+const G_TAG = "G-FZ1HL6FBE1";
+ReactGA.initialize(G_TAG);
+
 function App() {
   const [prevLocation, setPrevLocation] = useState(null);
   const handleNavigation = (location) => {

@@ -1,21 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import FeaturedBlogPosts from "../components/Featuredblogposts";
-import IntroPosts from "../components/IntroPosts";
 import IntroPosts2 from "../components/IntroPosts2";
-import RecentPosts from "../components/Recentposts";
 import PostFormWidget from "../components/PostFormWidget";
 import { db } from "../firebase-config";
-import {
-  getFirestore,
-  getDocs,
-  doc,
-  setDoc,
-  collection,
-  getDoc,
-  query,
-  where,
-} from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { UserContext } from "../context/user.context";
 
 function Home() {

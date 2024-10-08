@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../components/Layout";
+import ReactGA from "react-ga4";
 
 function Contactus() {
   const onSubmit = async (event) => {
@@ -24,6 +25,17 @@ function Contactus() {
       console.log("Success", res);
     }
   };
+
+  useEffect(() => {
+    ReactGA.initialize(import.meta.env.VITE_MEASUREMENT_ID);
+
+    // Send a pageview hit
+    ReactGA.send({
+      hitType: "pageview",
+      page: "/contactus",
+      title: "Contact Us",
+    });
+  }, []);
 
   return (
     <Layout>

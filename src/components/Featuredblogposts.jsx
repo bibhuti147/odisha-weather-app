@@ -1,8 +1,7 @@
 import { doc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { db } from "../firebase-config";
 
 const Carousel = ({ fposts }) => {
@@ -69,9 +68,11 @@ const Carousel = ({ fposts }) => {
     <div {...swipeHandlers}>
       <div
         onClick={handleClick}
-        class="h-48 md:h-96 rounded-md shadow-2xl overflow-hidden bg-cover bg-center w-full"
+        className="h-48 md:h-96 rounded-md shadow-2xl overflow-hidden bg-cover bg-center w-full"
         style={{
-          backgroundImage: `url(${tposts[currentIndex].thumbnail})`,
+          backgroundImage: `url("${tposts[currentIndex].thumbnail}")`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
         }}
       >
         <div class="bg-gray-900 bg-opacity-70 flex items-center h-full">

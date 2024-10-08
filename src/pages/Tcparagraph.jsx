@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import Layout from "../components/Layout";
-import { logEvent } from "firebase/analytics";
-import { analytics } from "../firebase-config";
+import ReactGA from "react-ga4";
 
 const Tcparagraph = () => {
   // Log a screen_view event when the component mounts
   useEffect(() => {
-    logEvent(analytics, "screen_view", {
-      firebase_screen: "TermsAndConditions",
-      firebase_screen_class: "TermsAndConditions",
+    ReactGAImplementation.initialize(import.meta.env.VITE_MEASUREMENT_ID);
+
+    // Send a pageview hit
+    ReactGA.send({
+      hitType: "pageview",
+      page: "/terms",
+      title: "Terms Conditions",
     });
   }, []);
 

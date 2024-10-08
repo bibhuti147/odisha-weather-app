@@ -4,8 +4,7 @@ import FullPost from "../components/FullPost";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../context/user.context";
 import { BlogContext } from "../context/blog.context";
-import { logEvent } from "firebase/analytics";
-import { analytics } from "../firebase-config";
+import ReactGA from "react-ga4";
 
 const BlogPosts = () => {
   const { currentUser } = useContext(UserContext);
@@ -16,9 +15,13 @@ const BlogPosts = () => {
 
   useEffect(() => {
     if (post) {
-      logEvent(analytics, "screen_view", {
-        firebase_screen: `BlogPost_${post.title}`,
-        firebase_screen_class: "BlogPosts",
+      ReactGA.initialize(import.meta.env.VITE_MEASUREMENT_ID);
+
+      // Send a pageview hit
+      ReactGA.send({
+        hitType: "pageview",
+        page: `${post.title}`,
+        title: `${post.title}`,
       });
     }
   }, [post, postId]);
